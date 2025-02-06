@@ -1,0 +1,73 @@
+{% extends 'base.html'%}
+
+{% load bootstrap%}
+{% block main%}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Gestão de Estoque</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core_home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core_produtos' %}">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'core_ingredientes' %}">Ingredientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Configurações</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo da página principal -->
+    <div class="container mt-5">
+        <h2>Lista de Ingredientes em Estoque</h2>
+
+        <!-- Tabela de Ingredientes -->
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome do Ingrediente</th>
+                        <th>Quantidade em estoque</th>
+                        <th>Estoque minimo</th>
+                        <th>unidade de medida</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ingrediente in ingredientes %}
+                    <tr>
+                        <td>{{ingrediente.id}}</td>
+                        <td>{{ingrediente.nome}}</td>
+                        <td>{{ingrediente.estoque_atual}}</td>
+                        <td>{{ingrediente.estoque_min}}</td>
+                        <td>{{ingrediente.unidade_medida}}</td>
+                        <td>
+                            <a href="#" class="btn btn-info btn-sm">Editar</a>
+                            <a href="#" class="btn btn-danger btn-sm">Excluir</a>
+                        </td>
+                    </tr>
+                    {% endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Adicionar Novo Ingrediente</h1>
+        <form action="{% url 'core_ingrediente_novo'%}" method="POST">
+            {% csrf_token %}
+            {{ form|bootstrap}}
+            <button type="submit" class="btn btn-primary">Adicionar Ingrediente</button>
+        </form>
+    </div>
+{% endblock%}

@@ -1,0 +1,118 @@
+{% extends 'base.html'%}
+
+{% block main%}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Gestão de Estoque</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Alternar navegação">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{% url 'core_home' %}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core_produtos' %}">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'core_ingredientes' %}">Ingredientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Configurações</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo da página principal -->
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Painel de informações do estoque -->
+            <div class="col-md-4">
+                <div class="card text-white bg-primary mb-3">
+                    <div class="card-header">Total de Produtos</div>
+                    <div class="card-body">
+                        <h5 class="card-title">50 Itens</h5>
+                        <p class="card-text">Este é o número total de produtos em estoque.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-white bg-success mb-3">
+                    <div class="card-header">Produtos Disponíveis</div>
+                    <div class="card-body">
+                        <h5 class="card-title">30 Itens</h5>
+                        <p class="card-text">Quantidade de produtos disponíveis para venda.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card text-white bg-danger mb-3">
+                    <div class="card-header">Produtos Baixos</div>
+                    <div class="card-body">
+                        <h5 class="card-title">5 Itens</h5>
+                        <p class="card-text">Produtos que estão quase no estoque mínimo.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabela de produtos em estoque -->
+        <div class="table-responsive">
+            <h3>Lista de Produtos</h3>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nome do Produto</th>
+                        <th>Categoria</th>
+                        <th>Quantidade</th>
+                        <th>Preço Unitário</th>
+                        <th>Data de Validade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Chocolate ao Leite</td>
+                        <td>Doces</td>
+                        <td>10</td>
+                        <td>R$ 5,00</td>
+                        <td>12/2025</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Bolo de Morango</td>
+                        <td>Bolos</td>
+                        <td>5</td>
+                        <td>R$ 15,00</td>
+                        <td>06/2025</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Doces de Coco</td>
+                        <td>Doces</td>
+                        <td>20</td>
+                        <td>R$ 7,00</td>
+                        <td>10/2025</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Botões de Ação -->
+        <div class="mt-4">
+            <a href="#" class="btn btn-primary">Adicionar Produto</a>
+            <a href="#" class="btn btn-warning">Relatório de Vendas</a>
+        </div>
+    </div>
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
+
+{% endblock %}
