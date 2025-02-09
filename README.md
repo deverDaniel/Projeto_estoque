@@ -1,1 +1,1 @@
-Em Produção anda não está 100% funcional
+Em Produção ainda não está 100% funcional
