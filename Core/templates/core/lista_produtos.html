@@ -40,24 +40,26 @@
                         <th>Preço unitario</th>
                         <th>Em Estoque</th>
                         <th>Quantidade minima</th>
+                        <th>Preço de Custo</th>
                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for produto in produtos %}
+                {% for produto in produtos %}
                     <tr>
                         <td>{{produto.id}}</td>
                         <td>{{produto.nome}}</td>
                         <td>{{produto.preco_unitario}}</td>
                         <td>{{produto.quantidade_estoque}}</td>
                         <td>{{produto.min_estoque}}</td>
+                        <td>{{produto.preco_custo}}</td>
                         <td>
                             <a href="#" class="btn btn-info btn-sm">Editar</a>
                             <a href="#" class="btn btn-danger btn-sm">Excluir</a>
                             <a href="{% url 'core_adicionar_ingrediente' produto.id%}" class="btn btn-primary btn-sm">Alterar Receita</a>
                         </td>
                     </tr>
-                    {% endfor%}
+                {% endfor%}
                 </tbody>
             </table>
         </div>

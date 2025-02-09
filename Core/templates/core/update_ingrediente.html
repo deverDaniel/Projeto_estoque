@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+{% load bootstrap%}
+{% block main%}
+<h1>Editar Ingrediente</h1>
+    <form action="{% url 'core_update_ingrediente' ingrediente.id %}" method="POST">
+        {% csrf_token %}
+        {{ form|bootstrap}}
+        <button type="submit">Salvar Alterações</button>
+    </form>
+{% endblock %}
