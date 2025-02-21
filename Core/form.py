@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 from .models import Ingrediente, Produto, ProdutoIngrediente
 
 class ProdutoForm(ModelForm):
@@ -16,4 +17,5 @@ class ProdutoIngredienteForm(ModelForm):
         model = ProdutoIngrediente
         fields = ['ingrediente', 'quantidade']
 
-
+class SearchForm(forms.Form):
+    query = forms.CharField(label='Buscar', max_length=100, required=False)

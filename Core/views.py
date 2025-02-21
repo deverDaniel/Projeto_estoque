@@ -1,9 +1,22 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.core.paginator import Paginator
 from .models import Ingrediente, Produto, ProdutoIngrediente
-from .form import IngredienteForm, ProdutoForm, ProdutoIngredienteForm
+from .form import IngredienteForm, ProdutoForm, ProdutoIngredienteForm, SearchForm
 
 def home(request):
-    return render(request, 'core/index.html')
+    query = request.GET.get('query', '')
+    produtos = Produto.objects.all()
+
+    if query:
+        produtos = produtos.filter(nome__icontains =query)  # Altere 'nome' para o campo que você deseja pesquisar
+
+    paginator = Paginator(produtos, 3)  # 3 é o número máximo de itens por página
+    page_number = request.GET.get('page')  # Pega o número da página da URL
+    produtos = paginator.get_page(page_number)
+
+    form = SearchForm(request.GET)
+    data = {'produtos': produtos, 'form': form}
+    return render(request, 'core/index.html', data)
 
 def ingredientes(request):
     ingredientes =  Ingrediente.objects.all()
@@ -12,7 +25,7 @@ def ingredientes(request):
     return render(request, 'core/lista_ingredientes.html', data)
 
 def produtos(request):
-    produtos =  Produto.objects.all()
+    produtos = Produto.objects.all()
     valor = 0
     for produto in produtos:
         prod_ingredientes = ProdutoIngrediente.objects.filter(produto=produto)
@@ -94,3 +107,16 @@ def Deletar_Produto_Ingrediente(request,produto_id, ingrediente_id):
         return redirect('core_adicionar_ingrediente', produto_id)
     else:
         return render(request, 'core/delete_confirm.html', {"obj": produtoIngrediente.ingrediente})
+
+def adicionar_pruduto_pronto(request, id):
+    return redirect('core_produtos')
+
+def pesquisar(request):
+    query = request.GET.get('query', '')
+    produtos = Produto.objects.all()
+
+    if query:
+        produtos = produtos.filter(nome=query)  # Altere 'nome' para o campo que você deseja pesquisar
+
+    form = SearchForm(request.GET)
+    return render(request, 'tabela.html', {'form': form, 'produtos': produtos})
