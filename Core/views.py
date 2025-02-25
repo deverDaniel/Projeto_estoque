@@ -120,3 +120,14 @@ def pesquisar(request):
 
     form = SearchForm(request.GET)
     return render(request, 'tabela.html', {'form': form, 'produtos': produtos})
+
+def adiciona_quantidade(request, id):
+    quantidade = int(request.POST.get('quantidade', 0))
+    receita = ProdutoIngrediente.objects.filter(produto=id)
+    for produto in receita:
+        ingrediente = get_object_or_404(Ingrediente,id=produto.ingrediente.id)
+        print(produto.quantidade)
+        ingrediente.estoque_atual -= quantidade * produto.quantidade
+        ingrediente.save()
+
+    return redirect('core_home')

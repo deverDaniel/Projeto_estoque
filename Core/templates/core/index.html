@@ -85,7 +85,7 @@
                         <td>{{produto.preco_unitario}}</td>
                         <td>{{produto.min_estoque}}</td>
                         <td>
-                            <form method="POST" action="{% url 'core_adicionar_ingrediente' produto.id %}">
+                            <form method="POST" action="{% url 'core_adicionar_quantidade' produto.id %}">
                                 {% csrf_token %}
                                 <div class="input-group mb-3">
                                       <!-- Input de Quantidade -->
